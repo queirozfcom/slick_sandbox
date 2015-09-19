@@ -111,7 +111,7 @@ object CaseClass {
 
   def insertUser(name:String,password:String): Unit = {
 
-    // use zero because the database will generate a new ID
+    // use zero as the ID because the database will generate a new ID
     val newUser = (users returning users.map(_.id)) += User(0,name=name,password=password,email=None)
 
     // note that the newly-added id is returned instead of
@@ -128,13 +128,7 @@ object CaseClass {
 
 
 
-//  def compose():Unit = {
-//
-//    val actions = (
-//      _ <- users.filter(_.id)
-//    )
-//
-//  }
+]
 
 
 }
