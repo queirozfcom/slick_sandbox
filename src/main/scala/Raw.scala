@@ -104,15 +104,14 @@ object Raw {
       affectedRows <- if (exists.isEmpty) qInsert else qUpdate
     } yield affectedRows
 
-    Await.result(db.run(actions.transactionally).map { affectedRows =>
-      affectedRows match {
-        case 1 => println("all ok!")
-        case 0 => println("no rows were affected! maybe there was an error")
-      }
+    // using pattern matching on anonymous partial function
+    // instead of match statement, like I did in previous examples
+    Await.result(db.run(actions.transactionally).map {
+      case 1 => println("all ok!")
+      case 0 => println("no rows were affected! maybe there was an error")
     }.recover {
       case e: Exception => println("Caught exception: " + e.getMessage)
     }, timeout)
-
 
   }
 
