@@ -5,3 +5,4 @@ CREATE TABLE users (
     email varchar(255) DEFAULT NULL,
     PRIMARY KEY (id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+CREATE UNIQUE INDEX "unique_name" ON "users"("name");
