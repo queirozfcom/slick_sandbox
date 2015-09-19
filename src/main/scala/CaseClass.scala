@@ -97,5 +97,19 @@ object CaseClass {
       }, timeout)
   }
 
+//  def insertJohn(): Unit = {
+//    val newUser = (users returning users.map(_.id)) += User()
+//  }
+
+
+
+//  def compose():Unit = {
+//
+//    val actions = (
+//      _ <- users.filter(_.id)
+//    )
+//
+//  }
+
 
 }

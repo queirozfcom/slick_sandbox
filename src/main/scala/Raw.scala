@@ -54,8 +54,7 @@ object Raw {
         // prints the number of affected rows
         // which amount to 1 if the insert was successful
         println(res)
-      }
-    ,timeout)
+      } ,timeout)
 
   }
 
@@ -66,10 +65,26 @@ object Raw {
       db.run(q).map{ res =>
         // again, the number of affected rows
         println(res)
-      }
-      ,timeout)
+      } ,timeout)
 
   }
 
+
+  def errorHandling():Unit = {
+    val id = "1"
+    val name = "peter"
+    val password = "passwd"
+
+    val q = sqlu"insert into users(id,name,password) values($id,$name,$password)"
+
+    Await.result(db.run(q).map { res =>
+      res match{
+        case 1 => println("all good")
+        case 0 => println("couldn't add record")
+      }
+    }.recover{
+      case e:Exception =>println("Caught exception: "+e.getMessage)
+    }, timeout)
+  }
 
 }
